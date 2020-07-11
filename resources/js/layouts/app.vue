@@ -2,7 +2,7 @@
     <div class="min-h-screen bg-gray-100">
         <nav class="bg-white shadow py-4 mb-6">
             <div class="container flex justify-between mx-auto">
-                <inertia-link href="/" class="text-lg">Laravel</inertia-link>
+                <inertia-link href="/" class="text-lg">Kantor Wilayah Direktorat Jenderal Bea dan Cukai Sumatera Bagian Timur</inertia-link>
 
                 <button v-if="$page.user" type="button" class="text-gray-600 text-sm px-2" @click="$inertia.post($route('logout'))">Logout</button>
                 <div v-else>

@@ -12,7 +12,7 @@
          *
          * @type {Object}
          */
-        layout: require('../layouts/app').default,
+        layout: require('../layouts/dashboard').default,
 
         /**
          * Component properties.

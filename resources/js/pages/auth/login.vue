@@ -1,6 +1,6 @@
 <template>
     <form class="max-w-lg bg-white rounded-lg shadow mx-auto p-8" @submit.prevent="submit">
-        <h1 class="text-2xl font-bold">Sign In To Your Account</h1>
+        <h1 class="text-2xl font-bold mb-6">Sign In To Your Account</h1>
 
         <form-input class="mb-6"
                 label="Email"
