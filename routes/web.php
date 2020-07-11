@@ -12,6 +12,13 @@
 */
 
 Route::inertia('/', 'auth/login')->name('index');
-Route::inertia('home', 'home')->name('home')->middleware('auth');
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::post('users', 'UserController@store')->name('user.store');
+    Route::inertia('home', 'home')->name('home');
+    Route::get('pegawai', 'UserController@index')->name('pegawai');
+    Route::inertia('pegawai/form', 'pegawai-form')->name('pegawai.form');
+    Route::get('pegawai/edit/{id}', 'UserController@edit')->name('pegawai.edit');
+});
 
 Auth::routes();

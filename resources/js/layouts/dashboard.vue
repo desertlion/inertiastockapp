@@ -11,6 +11,11 @@
                     </a>
                 </li>
                 <li class="my-2 md:my-0 ">
+                    <inertia-link class="block py-1 md:py-3 pl-1 align-middle text-gray-600 no-underline hover:text-indigo-400" :href="$route('pegawai')">
+                        <i class="fas fa-users fa-fw mr-3"></i><span class="w-full inline-block pb-1 md:pb-0 text-sm">Pegawai</span>
+                    </inertia-link>
+                </li>
+                <li class="my-2 md:my-0 ">
                     <a href="#" class="block py-1 md:py-3 pl-1 align-middle text-gray-600 no-underline hover:text-indigo-400">
                         <i class="fas fa-tasks fa-fw mr-3"></i><span class="w-full inline-block pb-1 md:pb-0 text-sm">Tasks</span>
                     </a>
@@ -42,7 +47,7 @@
                     <div class="flex h-full justify-between items-center">
 
                         <!--Search-->
-                        <inertia-link href="/" class="text-lg font-bold pl-5 text-gray-700">Kantor Wilayah Direktorat Jenderal Bea dan Cukai Sumatera Bagian Timur</inertia-link>
+                        <inertia-link href="/home" class="text-lg font-bold pl-5 text-gray-700">Kantor Wilayah Direktorat Jenderal Bea dan Cukai Sumatera Bagian Timur</inertia-link>
                         <!-- / Search-->
 
                         <!--Menu-->
@@ -65,7 +70,7 @@
                                         <li>
                                             <hr class="border-t mx-2 border-gray-400">
                                         </li>
-                                        <li><button @click="$inertia.post($route('logout'))" class="px-4 py-2 block text-gray-900 hover:bg-indigo-400 hover:text-white no-underline hover:no-underline">Logout</button></li>
+                                        <li><button @click="$inertia.post($route('logout'))" class="px-4 py-2 block text-gray-900 hover:bg-indigo-400 hover:text-white no-underline w-full">Logout</button></li>
                                     </ul>
                                 </div>
                             </div>
@@ -80,7 +85,7 @@
             </div>
 
             <!--Dash Content -->
-            <div id="dash-content" class="py-6 lg:py-0 w-full flex flex-wrap content-start min-h-screen">
+            <div id="dash-content" class="py-6 lg:py-0 w-full flex flex-wrap content-start min-h-screen bg-gray-200">
                 <slot></slot>
             </div>
 
