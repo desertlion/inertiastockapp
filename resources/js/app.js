@@ -1,8 +1,10 @@
 import "./bootstrap"
 import Vue from "vue"
+import PortalVue from 'portal-vue'
 import { InertiaApp } from "@inertiajs/inertia-vue"
 
 Vue.use(InertiaApp)
+Vue.use(PortalVue)
 
 Vue.prototype.$route = route
 

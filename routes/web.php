@@ -19,6 +19,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('pegawai', 'UserController@index')->name('pegawai');
     Route::inertia('pegawai/form', 'pegawai-form')->name('pegawai.form');
     Route::get('pegawai/edit/{id}', 'UserController@edit')->name('pegawai.edit');
+
+    Route::resource('products', 'ProductsController');
 });
 
 Auth::routes();
