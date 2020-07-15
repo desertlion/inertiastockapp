@@ -21,6 +21,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('pegawai/edit/{id}', 'UserController@edit')->name('pegawai.edit');
 
     Route::resource('products', 'ProductsController');
+    Route::resource('stocks', 'StocksController');
+    Route::resource('incomingwares', 'IncomingWaresController');
+    Route::resource('orders', 'OrdersController');
+    Route::resource('deliveries', 'DeliveryController');
 });
 
 Auth::routes();

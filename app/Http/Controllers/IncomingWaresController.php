@@ -1,26 +1,26 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\IncomingWare;
 use App\Product;
 use App\Stock;
-use Inertia\Inertia;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Redirect;
-
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Inertia\Inertia;
 
-class ProductsController extends Controller
+class IncomingWaresController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        return Inertia::render('products/index', [
-            'filters' => $request->all('search'),
-            'products' => Product::with(['stock'])->get()
+        return Inertia::render('incomingwares/index', [
+            'wares' => IncomingWare::with(['product','penerima'])->get()
         ]);
     }
 
@@ -31,7 +31,10 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        return Inertia::render('products/create');
+        return Inertia::render('incomingwares/create', [
+            'products' => Product::all(),
+            'users' => User::all(),
+        ]);
     }
 
     /**
@@ -43,18 +46,26 @@ class ProductsController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
-            'satuan' => 'required',
+            'product_id' => 'required',
+            'jumlah' => 'required|integer',
+            'tanggal_masuk' => 'required|date',
+            'nama_toko' => 'required',
+            'penerima' => 'required'
         ]);
         DB::transaction(function () use ($request) {
-            $product = Product::create([
-                'name' => $request->input('name'),
-                'satuan' => $request->input('satuan'),
+            IncomingWare::create([
+                'product_id' => (int) $request->input('product_id'),
+                'jumlah' => (int) $request->input('jumlah'),
+                'tanggal_masuk' => $request->input('tanggal_masuk'),
+                'nama_toko' => $request->input('nama_toko'),
+                'penerima' => $request->input('penerima'),
             ]);
-            Stock::create(['product_id' => $product->id, 'total' => 0]);
+            $stock = Stock::where('product_id', $request->input('product_id'))->first();
+            $stock->total = $stock->total + $request->input('jumlah');
+            $stock->save();
         });
 
-        return Redirect::route('products.index');
+        return redirect()->route('incomingwares.index');
     }
 
     /**
@@ -76,9 +87,7 @@ class ProductsController extends Controller
      */
     public function edit($id)
     {
-        return Inertia::render('products/edit', [
-            'product' => Product::find($id),
-        ]);
+        //
     }
 
     /**
@@ -90,12 +99,7 @@ class ProductsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate(['name' => 'required', 'satuan' => 'required']);
-        $product = Product::find($id);
-        $product->name = $request->input('name');
-        $product->satuan = $request->input('satuan');
-        $product->save();
-        return redirect()->route('products.index');
+        //
     }
 
     /**

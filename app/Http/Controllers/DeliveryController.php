@@ -1,15 +1,15 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Product;
+
+use App\Delivery;
+use App\Order;
 use App\Stock;
-use Inertia\Inertia;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Redirect;
-
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Inertia\Inertia;
 
-class ProductsController extends Controller
+class DeliveryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,9 +18,9 @@ class ProductsController extends Controller
      */
     public function index(Request $request)
     {
-        return Inertia::render('products/index', [
+        return Inertia::render('deliveries/index', [
             'filters' => $request->all('search'),
-            'products' => Product::with(['stock'])->get()
+            'deliveries' => Delivery::with(['order'])->get(),
         ]);
     }
 
@@ -31,7 +31,7 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        return Inertia::render('products/create');
+        return Inertia::render('deliveries/create');
     }
 
     /**
@@ -43,18 +43,26 @@ class ProductsController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
-            'satuan' => 'required',
+            'order_id' => 'required',
+            'tanggal_penyerahan' => 'date',
         ]);
-        DB::transaction(function () use ($request) {
-            $product = Product::create([
-                'name' => $request->input('name'),
-                'satuan' => $request->input('satuan'),
-            ]);
-            Stock::create(['product_id' => $product->id, 'total' => 0]);
-        });
 
-        return Redirect::route('products.index');
+        // pastikan dulu ada itu input order
+        $order = Order::find($request->input('order_id'));
+        if(!$order) return redirect()->back();
+
+        $stock = Stock::where('product_id', $order->product_id)->first();
+        if($stock->jumlah - $order->jumlah < 0) return redirect()->back();
+
+        DB::transaction(function () use ($request, $order, $stock) {
+            Delivery::create([
+                'order_id' => $request->input('order_id'),
+                'tanggal_penyerahan' => $request->input('tanggal_penyerahan'),
+            ]);
+            $stock->jumlah = (int) $stock->jumlah - (int) $order->jumlah;
+            $stock->save();
+        });
+        return redirect()->route('deliveries.index');
     }
 
     /**
@@ -76,9 +84,7 @@ class ProductsController extends Controller
      */
     public function edit($id)
     {
-        return Inertia::render('products/edit', [
-            'product' => Product::find($id),
-        ]);
+        //
     }
 
     /**
@@ -90,12 +96,7 @@ class ProductsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate(['name' => 'required', 'satuan' => 'required']);
-        $product = Product::find($id);
-        $product->name = $request->input('name');
-        $product->satuan = $request->input('satuan');
-        $product->save();
-        return redirect()->route('products.index');
+        //
     }
 
     /**

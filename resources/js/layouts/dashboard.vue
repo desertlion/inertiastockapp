@@ -17,7 +17,22 @@
                 </li>
                 <li class="my-2 md:my-0 ">
                     <inertia-link class="block py-1 md:py-3 pl-1 align-middle text-gray-600 no-underline hover:text-indigo-400" :href="$route('products.index')">
-                        <i class="fas fa-tasks fa-fw mr-3"></i><span class="w-full inline-block pb-1 md:pb-0 text-sm">Products</span>
+                        <i class="fas fa-tasks fa-fw mr-3"></i><span class="w-full inline-block pb-1 md:pb-0 text-sm">Barang</span>
+                    </inertia-link>
+                </li>
+                <li class="my-2 md:my-0 ">
+                    <inertia-link class="block py-1 md:py-3 pl-1 align-middle text-gray-600 no-underline hover:text-indigo-400" :href="$route('incomingwares.index')">
+                        <i class="fas fa-fw mr-3"><img src="../../svg/icon_stock_in_16.svg" /></i><span class="w-full inline-block pb-1 md:pb-0 text-sm">Barang Masuk</span>
+                    </inertia-link>
+                </li>
+                <li class="my-2 md:my-0 ">
+                    <inertia-link class="block py-1 md:py-3 pl-1 align-middle text-gray-600 no-underline hover:text-indigo-400" :href="$route('orders.index')">
+                        <i class="fas fa-fw mr-3"><img src="../../svg/icon_stock_out_16.svg" /></i><span class="w-full inline-block pb-1 md:pb-0 text-sm">Permintaan</span>
+                    </inertia-link>
+                </li>
+                <li class="my-2 md:my-0 ">
+                    <inertia-link class="block py-1 md:py-3 pl-1 align-middle text-gray-600 no-underline hover:text-indigo-400" :href="$route('deliveries.index')">
+                        <i class="fas fa-fw fa-truck mr-3"></i><span class="w-full inline-block pb-1 md:pb-0 text-sm">Penyerahan</span>
                     </inertia-link>
                 </li>
                 <li class="my-2 md:my-0">
@@ -44,7 +59,7 @@
             <div class="h-40 lg:h-20 w-full flex flex-wrap mb-6">
                 <nav id="header1" class="bg-gray-100 w-auto flex-1 border-b-1 border-gray-300 order-1 lg:order-2">
 
-                    <div class="flex h-full justify-between items-center">
+                    <div class="flex h-full justify-between items-center shadow">
 
                         <!--Search-->
                         <inertia-link href="/home" class="text-lg font-bold pl-5 text-gray-700">Kantor Wilayah Direktorat Jenderal Bea dan Cukai Sumatera Bagian Timur</inertia-link>
