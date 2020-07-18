@@ -61,7 +61,8 @@ class IncomingWaresController extends Controller
                 'penerima' => $request->input('penerima'),
             ]);
             $stock = Stock::where('product_id', $request->input('product_id'))->first();
-            $stock->total = $stock->total + $request->input('jumlah');
+            $stock->jumlah = $stock->jumlah + $request->input('jumlah');
+            $stock->total = 0;
             $stock->save();
         });
 

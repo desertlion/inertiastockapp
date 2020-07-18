@@ -59,7 +59,12 @@ class DeliveryController extends Controller
                 'order_id' => $request->input('order_id'),
                 'tanggal_penyerahan' => $request->input('tanggal_penyerahan'),
             ]);
+            // Ubah Status Permintaan dari Processing menjadi done
+            $order->status = 1;
+            $order->save();
+            // Kurangi jumlah stock
             $stock->jumlah = (int) $stock->jumlah - (int) $order->jumlah;
+            $stock->total = $stock->total;
             $stock->save();
         });
         return redirect()->route('deliveries.index');

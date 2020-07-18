@@ -51,7 +51,7 @@ class ProductsController extends Controller
                 'name' => $request->input('name'),
                 'satuan' => $request->input('satuan'),
             ]);
-            Stock::create(['product_id' => $product->id, 'total' => 0]);
+            Stock::create(['product_id' => $product->id, 'jumlah' => 0, 'total' => 0]);
         });
 
         return Redirect::route('products.index');
