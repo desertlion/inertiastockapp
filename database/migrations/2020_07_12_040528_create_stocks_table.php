@@ -17,7 +17,6 @@ class CreateStocksTable extends Migration
             $table->id();
             $table->foreignId('product_id');
             $table->integer('jumlah');
-            $table->integer('jumlah_sebelum');
             $table->integer('total');
             $table->timestamps();
         });

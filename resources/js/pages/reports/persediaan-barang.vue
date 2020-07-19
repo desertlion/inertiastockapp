@@ -1,50 +1,57 @@
 <template>
   <div class="container">
-    <h1 class="mb-8 font-bold text-3xl">Penyerahan</h1>
+    <h1 class="mb-8 font-bold text-3xl">
+      <inertia-link class="text-indigo-400 hover:text-indigo-600" :href="$route('reports.index')">Laporan</inertia-link>
+      <span class="text-indigo-400 font-medium">/</span> Persediaan Barang
+    </h1>
     <div class="mb-6 flex justify-between items-center">
-      <search-filter v-model="form.search" class="w-full max-w-md mr-4" @reset="reset">
-        <label class="block text-gray-700">Role:</label>
-        <select v-model="form.role" class="mt-1 w-full form-select">
-          <option :value="null" />
-          <option value="user">User</option>
-          <option value="owner">Owner</option>
-        </select>
-      </search-filter>
-      <inertia-link class="btn-indigo" :href="$route('deliveries.create')">
-        <span>Tambah</span>
-        <span class="hidden md:inline">Penyerahan</span>
-      </inertia-link>
+        <div class="flex">
+            <datetime v-model="form.start_date" class="p-2"></datetime>
+            <datetime v-model="form.end_date" class="p-2"></datetime>
+        </div>
+        <inertia-link class="btn-indigo" :href="$route('reports.index')">
+            <span>Laporan</span>
+            <span class="hidden md:inline">Persediaan Barang</span>
+        </inertia-link>
     </div>
     <div class="bg-white rounded shadow overflow-x-auto">
       <table class="w-full whitespace-no-wrap">
         <tr class="text-left font-bold">
-          <th class="px-6 pt-6 pb-4">Nomor Permintaan</th>
-          <th class="px-6 pt-6 pb-4">Tanggal Penyerahan</th>
-          <th class="px-6 pt-6 pb-4">Jumlah</th>
-          <th class="px-6 pt-6 pb-4">Action</th>
+          <th class="px-6 pt-6 pb-4">Nama Barang</th>
+          <th class="px-6 pt-6 pb-4">Stock Awal</th>
+          <th class="px-6 pt-6 pb-4">Masuk</th>
+          <th class="px-6 pt-6 pb-4">Keluar</th>
+          <th class="px-6 pt-6 pb-4">Stock Akhir</th>
         </tr>
-        <tr v-for="delivery in deliveries" :key="delivery.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
+        <tr v-for="report in reports" :key="report.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
           <td class="border-t">
-            <inertia-link class="px-6 py-4 flex items-center focus:text-indigo-500" :href="$route('orders.index')">
-              {{ delivery.order_id.toString().padStart(7, '0') }}
+            <inertia-link class="px-6 py-4 flex items-center focus:text-indigo-500" :href="$route('products.edit', report.id )">
+              {{ report.product_name }}
             </inertia-link>
           </td>
           <td class="border-t">
-            <inertia-link class="px-6 py-4 flex items-center focus:text-indigo-500" :href="$route('deliveries.show', delivery.id)">
-              {{ delivery.tanggal_penyerahan }}
+            <inertia-link class="px-6 py-4 flex items-center focus:text-indigo-500" :href="$route('products.edit', report.id )">
+              {{ report.jumlah_sebelum }}
             </inertia-link>
           </td>
           <td class="border-t">
-            <inertia-link class="px-6 py-4 flex items-center focus:text-indigo-500" :href="$route('orders.index')">
-              {{ delivery.order.jumlah }}
+            <inertia-link class="px-6 py-4 flex items-center focus:text-indigo-500" :href="$route('products.edit', report.id )">
+              {{ report.jumlah_masuk }}
             </inertia-link>
           </td>
           <td class="border-t">
-              Delete
+            <inertia-link class="px-6 py-4 flex items-center focus:text-indigo-500" :href="$route('products.edit', report.id )">
+              {{ report.jumlah_keluar }}
+            </inertia-link>
+          </td>
+          <td class="border-t">
+            <inertia-link class="px-6 py-4 flex items-center focus:text-indigo-500" :href="$route('products.edit', report.id )">
+              {{ report.stock }}
+            </inertia-link>
           </td>
         </tr>
-        <tr v-if="deliveries.length === 0">
-          <td class="border-t px-6 py-4" colspan="4">No Delivery found.</td>
+        <tr v-if="reports.length === 0">
+          <td class="border-t px-6 py-4" colspan="4">No Data found.</td>
         </tr>
       </table>
     </div>
@@ -66,25 +73,47 @@ export default {
     Icon,
     SearchFilter,
   },
-  props: {
-    deliveries: Array,
-    filters: Object,
-  },
+  props: ['incomings','products','outgoings'],
   data() {
     return {
-      form: {
-        search: this.filters.search,
-      },
+        reports: [],
+        form: {
+            start_date: '2020-07-01',
+            end_date: '2020-07-30',
+        },
     }
   },
+  mounted() {
+      const incomings = this.incomings.reduce((result, current) => {
+          result[current.product_id] = current;
+          return result;
+      }, {});
+      const outgoings = this.outgoings.reduce((result, current) => {
+          result[current.product_id] = current;
+          return result;
+      }, {});
+      this.reports = this.products.map(p => {
+        const jlh_sebelum = incomings[p.id] ? incomings[p.id].jumlah_sebelum : 0;
+        const jlh_masuk = incomings[p.id] ? incomings[p.id].jlh_total : 0;
+        const jlh_keluar= outgoings[p.id] ? outgoings[p.id].jlh_total : 0;
+        return {
+            id: p.id,
+            product_name: p.name,
+            jumlah_sebelum: jlh_sebelum,
+            jumlah_masuk: jlh_masuk,
+            jumlah_keluar: jlh_keluar,
+            stock: jlh_sebelum + jlh_masuk - jlh_keluar,
+        }
+      })
+  },
   watch: {
-    form: {
-      handler: throttle(function() {
-        let query = pickBy(this.form)
-        this.$inertia.replace(this.$route('deliveries', Object.keys(query).length ? query : { remember: 'forget' }))
-      }, 150),
-      deep: true,
-    },
+    // form: {
+    //   handler: throttle(function() {
+    //     let query = pickBy(this.form)
+    //     // this.$inertia.replace(this.$route('reports.stock', Object.keys(query).length ? query : { remember: 'forget' }))
+    //   }, 150),
+    //   deep: true,
+    // },
   },
   methods: {
     reset() {

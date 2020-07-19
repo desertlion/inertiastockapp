@@ -30,6 +30,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('purchases/create/{product_id?}', 'PurchaseController@create')->name('purchases.create');
     Route::post('purchases/store', 'PurchaseController@store')->name('purchases.store');
     Route::get('reports', 'ReportController@index')->name('reports.index');
+    Route::get('reports/stock', 'ReportController@stock')->name('reports.stock');
 });
 
 Auth::routes();

@@ -4,7 +4,7 @@
     <div class="mb-6">
         <ul class="flex justify-between flex-wrap">
             <li class="mb-6 w-1/2 pr-3">
-                <inertia-link :href="$route('')" class="bg-white rounded shadow py-4 w-full block text-center mr-3">
+                <inertia-link :href="$route('reports.stock')" class="bg-white rounded shadow py-4 w-full block text-center mr-3">
                     Laporan Persediaan Barang
                 </inertia-link>
             </li>

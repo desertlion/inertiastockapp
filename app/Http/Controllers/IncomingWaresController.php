@@ -53,14 +53,15 @@ class IncomingWaresController extends Controller
             'penerima' => 'required'
         ]);
         DB::transaction(function () use ($request) {
+            $stock = Stock::where('product_id', $request->input('product_id'))->first();
             IncomingWare::create([
                 'product_id' => (int) $request->input('product_id'),
                 'jumlah' => (int) $request->input('jumlah'),
+                'jumlah_sebelum' => $stock->jumlah,
                 'tanggal_masuk' => $request->input('tanggal_masuk'),
                 'nama_toko' => $request->input('nama_toko'),
                 'penerima' => $request->input('penerima'),
             ]);
-            $stock = Stock::where('product_id', $request->input('product_id'))->first();
             $stock->jumlah = $stock->jumlah + $request->input('jumlah');
             $stock->total = 0;
             $stock->save();

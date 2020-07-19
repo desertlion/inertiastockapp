@@ -17,6 +17,7 @@ class CreateIncomingWaresTable extends Migration
             $table->id();
             $table->foreignId('product_id');
             $table->integer('jumlah');
+            $table->integer('jumlah_sebelum');
             $table->date('tanggal_masuk');
             $table->string('nama_toko');
             $table->integer('penerima');

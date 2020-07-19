@@ -1,10 +1,16 @@
 import "./bootstrap"
 import Vue from "vue"
 import PortalVue from 'portal-vue'
+import { Datetime } from 'vue-datetime'
+
+// You need a specific loader for CSS files
+import 'vue-datetime/dist/vue-datetime.css'
+
 import { InertiaApp } from "@inertiajs/inertia-vue"
 
 Vue.use(InertiaApp)
 Vue.use(PortalVue)
+Vue.component('datetime', Datetime)
 
 Vue.prototype.$route = route
 

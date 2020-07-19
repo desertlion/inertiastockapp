@@ -70,3 +70,10 @@ html, body {
       box-shadow: 0 0 0 1px theme('colors.red.600');
     }
   }
+
+//   Datetime
+.vdatetime-input {
+    padding: 9px 15px;
+    border-radius: 5px;
+    box-shadow: 0 1px 7px rgba(0,0,0,.15);
+}
