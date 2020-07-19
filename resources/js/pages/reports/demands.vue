@@ -2,7 +2,7 @@
   <div class="container">
     <h1 class="mb-8 font-bold text-3xl">
       <inertia-link class="text-indigo-400 hover:text-indigo-600" :href="$route('reports.index')">Laporan</inertia-link>
-      <span class="text-indigo-400 font-medium">/</span> Persediaan Barang
+      <span class="text-indigo-400 font-medium">/</span> Permintaan
     </h1>
     <div class="mb-6 flex justify-between items-center">
         <div class="flex items-center justify-between">
@@ -17,46 +17,46 @@
         </div>
         <inertia-link class="btn-indigo" :href="$route('reports.index')">
             <span>Laporan</span>
-            <span class="hidden md:inline">Persediaan Barang Periode {{ months[bulan.toString().replace(/^[0]+/g,"")-1] }} {{ tahun }}</span>
+            <span class="hidden md:inline">Permintaan Barang Periode {{ months[bulan.toString().replace(/^[0]+/g,"")-1] }} {{ tahun }}</span>
         </inertia-link>
     </div>
     <div class="bg-white rounded shadow overflow-x-auto">
       <table class="w-full whitespace-no-wrap">
         <tr class="text-left font-bold">
           <th class="px-6 pt-6 pb-4">Nama Barang</th>
-          <th class="px-6 pt-6 pb-4">Stock Awal</th>
-          <th class="px-6 pt-6 pb-4">Masuk</th>
-          <th class="px-6 pt-6 pb-4">Keluar</th>
-          <th class="px-6 pt-6 pb-4">Stock Akhir</th>
+          <th class="px-6 pt-6 pb-4">Pegawai</th>
+          <th class="px-6 pt-6 pb-4">Jumlah</th>
+          <th class="px-6 pt-6 pb-4">Tanggal Permintaan</th>
+          <th class="px-6 pt-6 pb-4">Status</th>
         </tr>
-        <tr v-for="report in reports" :key="report.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
+        <tr v-for="demand in demands" :key="demand.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
           <td class="border-t">
-            <inertia-link class="px-6 py-4 flex items-center focus:text-indigo-500" :href="$route('products.edit', report.id )">
-              {{ report.product_name }}
+            <inertia-link class="px-6 py-4 flex items-center focus:text-indigo-500" :href="$route('products.index')">
+              {{ demand.product.name }}
             </inertia-link>
           </td>
           <td class="border-t">
-            <inertia-link class="px-6 py-4 flex items-center focus:text-indigo-500" :href="$route('products.edit', report.id )">
-              {{ report.jumlah_sebelum }}
+            <inertia-link class="px-6 py-4 flex items-center focus:text-indigo-500" :href="$route('pegawai.edit', demand.pegawai.id )">
+              {{ demand.pegawai.name }}
             </inertia-link>
           </td>
           <td class="border-t">
-            <inertia-link class="px-6 py-4 flex items-center focus:text-indigo-500" :href="$route('products.edit', report.id )">
-              {{ report.jumlah_masuk }}
+            <inertia-link class="px-6 py-4 flex items-center focus:text-indigo-500" :href="$route('orders.index')">
+              {{ demand.jumlah }}
             </inertia-link>
           </td>
           <td class="border-t">
-            <inertia-link class="px-6 py-4 flex items-center focus:text-indigo-500" :href="$route('products.edit', report.id )">
-              {{ report.jumlah_keluar }}
+            <inertia-link class="px-6 py-4 flex items-center focus:text-indigo-500" :href="$route('orders.index')">
+              {{ demand.tanggal_permintaan }}
             </inertia-link>
           </td>
           <td class="border-t">
-            <inertia-link class="px-6 py-4 flex items-center focus:text-indigo-500" :href="$route('products.edit', report.id )">
-              {{ report.stock }}
+            <inertia-link class="px-6 py-4 flex items-center focus:text-indigo-500" :href="$route('orders.index' )">
+              {{ demand.status ? 'Done' : 'Processing' }}
             </inertia-link>
           </td>
         </tr>
-        <tr v-if="reports.length === 0">
+        <tr v-if="demands.length === 0">
           <td class="border-t px-6 py-4" colspan="4">No Data found.</td>
         </tr>
       </table>
@@ -73,51 +73,27 @@ import SearchFilter from '@/shared/SearchFilter'
 import throttle from 'lodash/throttle'
 
 export default {
-  metaInfo: { title: 'Penyerahan' },
+  metaInfo: { title: 'Laporan Permintaan' },
   layout: Layout,
   components: {
     Icon,
     SearchFilter,
   },
-  props: ['incomings','products','outgoings','bulan','tahun'],
+  props: ['demands','bulan','tahun'],
   data() {
     return {
         months: ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'],
-        reports: [],
         form: {
             bulan: this.bulan,
             tahun: this.tahun,
         },
     }
   },
-  mounted() {
-      const incomings = this.incomings.reduce((result, current) => {
-          result[current.product_id] = current;
-          return result;
-      }, {});
-      const outgoings = this.outgoings.reduce((result, current) => {
-          result[current.product_id] = current;
-          return result;
-      }, {});
-      this.reports = this.products.map(p => {
-        const jlh_sebelum = incomings[p.id] ? incomings[p.id].jumlah_sebelum : 0;
-        const jlh_masuk = incomings[p.id] ? incomings[p.id].jlh_total : 0;
-        const jlh_keluar= outgoings[p.id] ? outgoings[p.id].jlh_total : 0;
-        return {
-            id: p.id,
-            product_name: p.name,
-            jumlah_sebelum: jlh_sebelum,
-            jumlah_masuk: jlh_masuk,
-            jumlah_keluar: jlh_keluar,
-            stock: jlh_sebelum + jlh_masuk - jlh_keluar,
-        }
-      })
-  },
   watch: {
     form: {
       handler: throttle(function() {
         let query = pickBy(this.form)
-        this.$inertia.replace(this.$route('reports.stock', Object.keys(query).length ? query : { remember: 'forget' }))
+        this.$inertia.replace(this.$route('reports.demands', Object.keys(query).length ? query : { remember: 'forget' }))
       }, 150),
       deep: true,
     },

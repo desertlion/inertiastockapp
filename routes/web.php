@@ -31,6 +31,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('purchases/store', 'PurchaseController@store')->name('purchases.store');
     Route::get('reports', 'ReportController@index')->name('reports.index');
     Route::get('reports/stock', 'ReportController@stock')->name('reports.stock');
+    Route::get('reports/demands', 'ReportController@demands')->name('reports.demands');
+    Route::get('reports/pembelian', 'ReportController@pembelian')->name('reports.pembelian');
+    Route::get('reports/barang-masuk', 'ReportController@barangmasuk')->name('reports.barang-masuk');
 });
 
 Auth::routes();

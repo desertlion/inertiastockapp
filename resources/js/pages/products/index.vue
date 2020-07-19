@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h1 class="mb-8 font-bold text-3xl">Products</h1>
+    <h1 class="mb-8 font-bold text-3xl">Barang</h1>
     <div class="mb-6 flex justify-between items-center">
       <search-filter v-model="form.search" class="w-full max-w-md mr-4" @reset="reset">
         <label class="block text-gray-700">Role:</label>
@@ -17,8 +17,8 @@
         </select>
       </search-filter>
       <inertia-link class="btn-indigo" :href="$route('products.create')">
-        <span>Create</span>
-        <span class="hidden md:inline">Product</span>
+        <span>Tambah</span>
+        <span class="hidden md:inline">Barang</span>
       </inertia-link>
     </div>
     <div class="bg-white rounded shadow overflow-x-auto">

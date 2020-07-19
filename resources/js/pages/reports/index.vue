@@ -9,17 +9,17 @@
                 </inertia-link>
             </li>
             <li class="mb-6 w-1/2">
-                <inertia-link :href="$route('')" class="bg-white rounded shadow py-4 w-full block text-center mr-3">
+                <inertia-link :href="$route('reports.demands')" class="bg-white rounded shadow py-4 w-full block text-center mr-3">
                     Laporan Permintaan Barang
                 </inertia-link>
             </li>
             <li class="mb-6 w-1/2 pr-3">
-                <inertia-link :href="$route('')" class="bg-white rounded shadow py-4 w-full block text-center mr-3">
+                <inertia-link :href="$route('reports.barang-masuk')" class="bg-white rounded shadow py-4 w-full block text-center mr-3">
                     Laporan Barang Masuk
                 </inertia-link>
             </li>
             <li class="mb-6 w-1/2">
-                <inertia-link :href="$route('')" class="bg-white rounded shadow py-4 w-full block text-center mr-3">
+                <inertia-link :href="$route('reports.pembelian')" class="bg-white rounded shadow py-4 w-full block text-center mr-3">
                     Laporan Pembelian Barang
                 </inertia-link>
             </li>
