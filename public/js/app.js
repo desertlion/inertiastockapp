@@ -2197,6 +2197,14 @@ __webpack_require__.r(__webpack_exports__);
     toggleUserMenu: function toggleUserMenu() {
       this.isUserMenuActive = !this.isUserMenuActive;
     }
+  },
+  computed: {
+    isKepala: function isKepala() {
+      return this.$page.user.jabatan == 'kepala';
+    },
+    isRumahTangga: function isRumahTangga() {
+      return this.$page.user.division == 'rumah tangga';
+    }
   }
 });
 
@@ -3357,13 +3365,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -3386,7 +3387,7 @@ __webpack_require__.r(__webpack_exports__);
         product_id: null,
         jumlah: null,
         tanggal_permintaan: null,
-        user_id: null
+        user_id: this.$page.user.id
       }
     };
   },
@@ -42456,109 +42457,131 @@ var render = function() {
       },
       [
         _c("ul", { staticClass: "list-reset " }, [
+          _vm.isRumahTangga
+            ? _c(
+                "li",
+                { staticClass: "my-2 md:my-0" },
+                [
+                  _c(
+                    "inertia-link",
+                    {
+                      staticClass:
+                        "block py-1 md:py-3 pl-1 align-middle text-gray-600 no-underline hover:text-indigo-400",
+                      attrs: { href: _vm.$route("home") }
+                    },
+                    [
+                      _c("i", { staticClass: "fas fa-home fa-fw mr-3" }),
+                      _c(
+                        "span",
+                        {
+                          staticClass:
+                            "w-full inline-block pb-1 md:pb-0 text-sm"
+                        },
+                        [_vm._v("Home")]
+                      )
+                    ]
+                  )
+                ],
+                1
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.isRumahTangga
+            ? _c(
+                "li",
+                { staticClass: "my-2 md:my-0" },
+                [
+                  _c(
+                    "inertia-link",
+                    {
+                      staticClass:
+                        "block py-1 md:py-3 pl-1 align-middle text-gray-600 no-underline hover:text-indigo-400",
+                      attrs: { href: _vm.$route("pegawai") }
+                    },
+                    [
+                      _c("i", { staticClass: "fas fa-users fa-fw mr-3" }),
+                      _c(
+                        "span",
+                        {
+                          staticClass:
+                            "w-full inline-block pb-1 md:pb-0 text-sm"
+                        },
+                        [_vm._v("Pegawai")]
+                      )
+                    ]
+                  )
+                ],
+                1
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.isRumahTangga
+            ? _c(
+                "li",
+                { staticClass: "my-2 md:my-0" },
+                [
+                  _c(
+                    "inertia-link",
+                    {
+                      staticClass:
+                        "block py-1 md:py-3 pl-1 align-middle text-gray-600 no-underline hover:text-indigo-400",
+                      attrs: { href: _vm.$route("products.index") }
+                    },
+                    [
+                      _c("i", { staticClass: "fas fa-tasks fa-fw mr-3" }),
+                      _c(
+                        "span",
+                        {
+                          staticClass:
+                            "w-full inline-block pb-1 md:pb-0 text-sm"
+                        },
+                        [_vm._v("Barang")]
+                      )
+                    ]
+                  )
+                ],
+                1
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.isRumahTangga
+            ? _c(
+                "li",
+                { staticClass: "my-2 md:my-0" },
+                [
+                  _c(
+                    "inertia-link",
+                    {
+                      staticClass:
+                        "block py-1 md:py-3 pl-1 align-middle text-gray-600 no-underline hover:text-indigo-400",
+                      attrs: { href: _vm.$route("incomingwares.index") }
+                    },
+                    [
+                      _c("i", { staticClass: "fas fa-fw mr-3" }, [
+                        _c("img", {
+                          attrs: {
+                            src: __webpack_require__(/*! ../../svg/icon_stock_in_16.svg */ "./resources/svg/icon_stock_in_16.svg")
+                          }
+                        })
+                      ]),
+                      _c(
+                        "span",
+                        {
+                          staticClass:
+                            "w-full inline-block pb-1 md:pb-0 text-sm"
+                        },
+                        [_vm._v("Barang Masuk")]
+                      )
+                    ]
+                  )
+                ],
+                1
+              )
+            : _vm._e(),
+          _vm._v(" "),
           _c(
             "li",
             { staticClass: "my-2 md:my-0" },
-            [
-              _c(
-                "inertia-link",
-                {
-                  staticClass:
-                    "block py-1 md:py-3 pl-1 align-middle text-gray-600 no-underline hover:text-indigo-400",
-                  attrs: { href: _vm.$route("home") }
-                },
-                [
-                  _c("i", { staticClass: "fas fa-home fa-fw mr-3" }),
-                  _c(
-                    "span",
-                    { staticClass: "w-full inline-block pb-1 md:pb-0 text-sm" },
-                    [_vm._v("Home")]
-                  )
-                ]
-              )
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "li",
-            { staticClass: "my-2 md:my-0 " },
-            [
-              _c(
-                "inertia-link",
-                {
-                  staticClass:
-                    "block py-1 md:py-3 pl-1 align-middle text-gray-600 no-underline hover:text-indigo-400",
-                  attrs: { href: _vm.$route("pegawai") }
-                },
-                [
-                  _c("i", { staticClass: "fas fa-users fa-fw mr-3" }),
-                  _c(
-                    "span",
-                    { staticClass: "w-full inline-block pb-1 md:pb-0 text-sm" },
-                    [_vm._v("Pegawai")]
-                  )
-                ]
-              )
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "li",
-            { staticClass: "my-2 md:my-0 " },
-            [
-              _c(
-                "inertia-link",
-                {
-                  staticClass:
-                    "block py-1 md:py-3 pl-1 align-middle text-gray-600 no-underline hover:text-indigo-400",
-                  attrs: { href: _vm.$route("products.index") }
-                },
-                [
-                  _c("i", { staticClass: "fas fa-tasks fa-fw mr-3" }),
-                  _c(
-                    "span",
-                    { staticClass: "w-full inline-block pb-1 md:pb-0 text-sm" },
-                    [_vm._v("Barang")]
-                  )
-                ]
-              )
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "li",
-            { staticClass: "my-2 md:my-0 " },
-            [
-              _c(
-                "inertia-link",
-                {
-                  staticClass:
-                    "block py-1 md:py-3 pl-1 align-middle text-gray-600 no-underline hover:text-indigo-400",
-                  attrs: { href: _vm.$route("incomingwares.index") }
-                },
-                [
-                  _c("i", { staticClass: "fas fa-fw mr-3" }, [
-                    _c("img", {
-                      attrs: { src: __webpack_require__(/*! ../../svg/icon_stock_in_16.svg */ "./resources/svg/icon_stock_in_16.svg") }
-                    })
-                  ]),
-                  _c(
-                    "span",
-                    { staticClass: "w-full inline-block pb-1 md:pb-0 text-sm" },
-                    [_vm._v("Barang Masuk")]
-                  )
-                ]
-              )
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "li",
-            { staticClass: "my-2 md:my-0 " },
             [
               _c(
                 "inertia-link",
@@ -42584,79 +42607,95 @@ var render = function() {
             1
           ),
           _vm._v(" "),
-          _c(
-            "li",
-            { staticClass: "my-2 md:my-0 " },
-            [
-              _c(
-                "inertia-link",
-                {
-                  staticClass:
-                    "block py-1 md:py-3 pl-1 align-middle text-gray-600 no-underline hover:text-indigo-400",
-                  attrs: { href: _vm.$route("deliveries.index") }
-                },
+          _vm.isRumahTangga
+            ? _c(
+                "li",
+                { staticClass: "my-2 md:my-0" },
                 [
-                  _c("i", { staticClass: "fas fa-fw fa-truck mr-3" }),
                   _c(
-                    "span",
-                    { staticClass: "w-full inline-block pb-1 md:pb-0 text-sm" },
-                    [_vm._v("Penyerahan")]
+                    "inertia-link",
+                    {
+                      staticClass:
+                        "block py-1 md:py-3 pl-1 align-middle text-gray-600 no-underline hover:text-indigo-400",
+                      attrs: { href: _vm.$route("deliveries.index") }
+                    },
+                    [
+                      _c("i", { staticClass: "fas fa-fw fa-truck mr-3" }),
+                      _c(
+                        "span",
+                        {
+                          staticClass:
+                            "w-full inline-block pb-1 md:pb-0 text-sm"
+                        },
+                        [_vm._v("Penyerahan")]
+                      )
+                    ]
                   )
-                ]
+                ],
+                1
               )
-            ],
-            1
-          ),
+            : _vm._e(),
           _vm._v(" "),
-          _c(
-            "li",
-            { staticClass: "my-2 md:my-0 " },
-            [
-              _c(
-                "inertia-link",
-                {
-                  staticClass:
-                    "block py-1 md:py-3 pl-1 align-middle text-gray-600 no-underline hover:text-indigo-400",
-                  attrs: { href: _vm.$route("purchases.index") }
-                },
+          _vm.isRumahTangga
+            ? _c(
+                "li",
+                { staticClass: "my-2 md:my-0" },
                 [
-                  _c("i", { staticClass: "fas fa-fw fa-wallet mr-3" }),
                   _c(
-                    "span",
-                    { staticClass: "w-full inline-block pb-1 md:pb-0 text-sm" },
-                    [_vm._v("Pembelian")]
+                    "inertia-link",
+                    {
+                      staticClass:
+                        "block py-1 md:py-3 pl-1 align-middle text-gray-600 no-underline hover:text-indigo-400",
+                      attrs: { href: _vm.$route("purchases.index") }
+                    },
+                    [
+                      _c("i", { staticClass: "fas fa-fw fa-wallet mr-3" }),
+                      _c(
+                        "span",
+                        {
+                          staticClass:
+                            "w-full inline-block pb-1 md:pb-0 text-sm"
+                        },
+                        [_vm._v("Pembelian")]
+                      )
+                    ]
                   )
-                ]
+                ],
+                1
               )
-            ],
-            1
-          ),
+            : _vm._e(),
           _vm._v(" "),
-          _c(
-            "li",
-            { staticClass: "my-2 md:my-0" },
-            [
-              _c(
-                "inertia-link",
-                {
-                  staticClass:
-                    "block py-1 md:py-3 pl-1 align-middle text-gray-600 no-underline hover:text-indigo-400",
-                  attrs: { href: _vm.$route("reports.index") }
-                },
+          _vm.isRumahTangga || _vm.isKepala
+            ? _c(
+                "li",
+                { staticClass: "my-2 md:my-0" },
                 [
-                  _c("i", {
-                    staticClass: "fas fa-chart-area fa-fw mr-3 text-indigo-400"
-                  }),
                   _c(
-                    "span",
-                    { staticClass: "w-full inline-block pb-1 md:pb-0 text-sm" },
-                    [_vm._v("Laporan")]
+                    "inertia-link",
+                    {
+                      staticClass:
+                        "block py-1 md:py-3 pl-1 align-middle text-gray-600 no-underline hover:text-indigo-400",
+                      attrs: { href: _vm.$route("reports.index") }
+                    },
+                    [
+                      _c("i", {
+                        staticClass:
+                          "fas fa-chart-area fa-fw mr-3 text-indigo-400"
+                      }),
+                      _c(
+                        "span",
+                        {
+                          staticClass:
+                            "w-full inline-block pb-1 md:pb-0 text-sm"
+                        },
+                        [_vm._v("Laporan")]
+                      )
+                    ]
                   )
-                ]
+                ],
+                1
               )
-            ],
-            1
-          )
+            : _vm._e()
         ])
       ]
     ),
@@ -44516,33 +44555,26 @@ var render = function() {
             "div",
             { staticClass: "p-8 -mr-6 -mb-8 flex flex-wrap" },
             [
-              _c(
-                "form-select",
-                {
-                  staticClass: "mb-6 w-full",
-                  attrs: {
-                    label: "Pilih Pegawai",
-                    placeholder: "Pilih Pegawai",
-                    errors: _vm.$page.errors.user_id,
-                    required: ""
-                  },
-                  model: {
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
                     value: _vm.form.user_id,
-                    callback: function($$v) {
-                      _vm.$set(_vm.form, "user_id", $$v)
-                    },
                     expression: "form.user_id"
                   }
-                },
-                _vm._l(_vm.users, function(user) {
-                  return _c(
-                    "option",
-                    { key: "u-" + user.id, domProps: { value: user.id } },
-                    [_vm._v(_vm._s(user.name))]
-                  )
-                }),
-                0
-              ),
+                ],
+                attrs: { type: "hidden" },
+                domProps: { value: _vm.form.user_id },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.form, "user_id", $event.target.value)
+                  }
+                }
+              }),
               _vm._v(" "),
               _c(
                 "form-select",

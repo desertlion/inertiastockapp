@@ -7,14 +7,7 @@
     <div class="bg-white rounded shadow overflow-hidden">
       <form @submit.prevent="submit">
         <div class="p-8 -mr-6 -mb-8 flex flex-wrap">
-            <form-select class="mb-6 w-full"
-                label="Pilih Pegawai"
-                placeholder="Pilih Pegawai"
-                v-model="form.user_id"
-                :errors="$page.errors.user_id"
-                required>
-                <option v-for="user in users" :key="`u-${user.id}`" :value="user.id">{{ user.name }}</option>
-            </form-select>
+            <input type="hidden" v-model="form.user_id" />
             <form-select class="mb-6 w-full"
                 label="Pilih Barang"
                 placeholder="Pilih Barang"
@@ -55,7 +48,7 @@ export default {
         product_id: null,
         jumlah: null,
         tanggal_permintaan: null,
-        user_id: null,
+        user_id: this.$page.user.id,
       },
     }
   },

@@ -5,42 +5,42 @@
         <div id="sidebar" class="h-screen w-16 menu bg-white text-white px-4 flex items-center nunito static fixed shadow">
 
             <ul class="list-reset ">
-                <li class="my-2 md:my-0">
+                <li class="my-2 md:my-0" v-if="isRumahTangga">
                     <inertia-link class="block py-1 md:py-3 pl-1 align-middle text-gray-600 no-underline hover:text-indigo-400" :href="$route('home')">
                         <i class="fas fa-home fa-fw mr-3"></i><span class="w-full inline-block pb-1 md:pb-0 text-sm">Home</span>
                     </inertia-link>
                 </li>
-                <li class="my-2 md:my-0 ">
+                <li class="my-2 md:my-0" v-if="isRumahTangga">
                     <inertia-link class="block py-1 md:py-3 pl-1 align-middle text-gray-600 no-underline hover:text-indigo-400" :href="$route('pegawai')">
                         <i class="fas fa-users fa-fw mr-3"></i><span class="w-full inline-block pb-1 md:pb-0 text-sm">Pegawai</span>
                     </inertia-link>
                 </li>
-                <li class="my-2 md:my-0 ">
+                <li class="my-2 md:my-0" v-if="isRumahTangga">
                     <inertia-link class="block py-1 md:py-3 pl-1 align-middle text-gray-600 no-underline hover:text-indigo-400" :href="$route('products.index')">
                         <i class="fas fa-tasks fa-fw mr-3"></i><span class="w-full inline-block pb-1 md:pb-0 text-sm">Barang</span>
                     </inertia-link>
                 </li>
-                <li class="my-2 md:my-0 ">
+                <li class="my-2 md:my-0" v-if="isRumahTangga">
                     <inertia-link class="block py-1 md:py-3 pl-1 align-middle text-gray-600 no-underline hover:text-indigo-400" :href="$route('incomingwares.index')">
                         <i class="fas fa-fw mr-3"><img src="../../svg/icon_stock_in_16.svg" /></i><span class="w-full inline-block pb-1 md:pb-0 text-sm">Barang Masuk</span>
                     </inertia-link>
                 </li>
-                <li class="my-2 md:my-0 ">
+                <li class="my-2 md:my-0">
                     <inertia-link class="block py-1 md:py-3 pl-1 align-middle text-gray-600 no-underline hover:text-indigo-400" :href="$route('orders.index')">
                         <i class="fas fa-fw mr-3"><img src="../../svg/icon_stock_out_16.svg" /></i><span class="w-full inline-block pb-1 md:pb-0 text-sm">Permintaan</span>
                     </inertia-link>
                 </li>
-                <li class="my-2 md:my-0 ">
+                <li class="my-2 md:my-0" v-if="isRumahTangga">
                     <inertia-link class="block py-1 md:py-3 pl-1 align-middle text-gray-600 no-underline hover:text-indigo-400" :href="$route('deliveries.index')">
                         <i class="fas fa-fw fa-truck mr-3"></i><span class="w-full inline-block pb-1 md:pb-0 text-sm">Penyerahan</span>
                     </inertia-link>
                 </li>
-                <li class="my-2 md:my-0 ">
+                <li class="my-2 md:my-0" v-if="isRumahTangga">
                     <inertia-link class="block py-1 md:py-3 pl-1 align-middle text-gray-600 no-underline hover:text-indigo-400" :href="$route('purchases.index')">
                         <i class="fas fa-fw fa-wallet mr-3"></i><span class="w-full inline-block pb-1 md:pb-0 text-sm">Pembelian</span>
                     </inertia-link>
                 </li>
-                <li class="my-2 md:my-0">
+                <li class="my-2 md:my-0" v-if="isRumahTangga || isKepala">
                     <inertia-link class="block py-1 md:py-3 pl-1 align-middle text-gray-600 no-underline hover:text-indigo-400" :href="$route('reports.index')">
                         <i class="fas fa-chart-area fa-fw mr-3 text-indigo-400"></i><span class="w-full inline-block pb-1 md:pb-0 text-sm">Laporan</span>
                     </inertia-link>
@@ -113,6 +113,14 @@
         }),
         methods: {
             toggleUserMenu() { this.isUserMenuActive = !this.isUserMenuActive; }
-        }
+        },
+        computed: {
+            isKepala() {
+                return this.$page.user.jabatan == 'kepala';
+            },
+            isRumahTangga() {
+                return this.$page.user.division == 'rumah tangga';
+            },
+        },
     }
 </script>
