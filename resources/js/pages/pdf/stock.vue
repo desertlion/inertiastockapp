@@ -5,17 +5,6 @@
       <span class="text-indigo-400 font-medium">/</span> Persediaan Barang
     </h1>
     <div class="mb-6 flex justify-between items-center">
-        <div class="flex items-center justify-between">
-            <form-select class="w-full mr-6"
-                label="Pilih Bulan"
-                placeholder="Pilih Bulan"
-                v-model="form.bulan"
-                :errors="$page.errors.bulan">
-                <option v-for="(b,index) in months" :key="`b-${b}`" :value="`${(index+1).toString().padStart(2, '0')}`">{{ b }}</option>
-            </form-select>
-          <form-input class="w-full" v-model="form.tahun" :errors="$page.errors.tahun" label="Pilih Tahun" />
-          <a :href="pdfurl" target="_blank" class="text-center rounded shadow b-1 py-2 px-6 ml-5 bg-indigo-600 text-white">Download PDF</a>
-        </div>
         <inertia-link class="btn-indigo" :href="$route('reports.index')">
             <span>Laporan</span>
             <span class="hidden md:inline">Persediaan Barang Periode {{ months[bulan.toString().replace(/^[0]+/g,"")-1] }} {{ tahun }}</span>
@@ -67,14 +56,14 @@
 
 <script>
 import Icon from '@/shared/Icon'
-import Layout from '../../layouts/dashboard'
+import Layout from '../../layouts/pdf'
 import mapValues from 'lodash/mapValues'
 import pickBy from 'lodash/pickBy'
 import SearchFilter from '@/shared/SearchFilter'
 import throttle from 'lodash/throttle'
 
 export default {
-  metaInfo: { title: 'Penyerahan' },
+  metaInfo: { title: 'Laporan Persediaan Barang' },
   layout: Layout,
   components: {
     Icon,

@@ -14,6 +14,7 @@
                 <option v-for="(b,index) in months" :key="`b-${b}`" :value="`${(index+1).toString().padStart(2, '0')}`">{{ b }}</option>
             </form-select>
           <form-input class="w-full" v-model="form.tahun" :errors="$page.errors.tahun" label="Pilih Tahun" />
+          <a :href="pdfurl" target="_blank" class="text-center rounded shadow b-1 py-2 px-6 ml-5 bg-indigo-600 text-white">Download PDF</a>
         </div>
         <inertia-link class="btn-indigo" :href="$route('reports.index')">
             <span>Laporan</span>
@@ -39,7 +40,7 @@
               {{ ware.nama_toko }}
           </td>
           <td class="border-t px-6 py-4">
-              {{ ware.penerima.name }}
+              {{ ware.Penerima.name }}
           </td>
         </tr>
         <tr v-if="wares.length === 0">
@@ -83,6 +84,11 @@ export default {
       }, 150),
       deep: true,
     },
+  },
+  computed: {
+      pdfurl() {
+          return this.$route('pdf.barangmasuk', [this.form.bulan, this.form.tahun]);
+      }
   },
   methods: {
     reset() {

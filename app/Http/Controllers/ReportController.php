@@ -99,7 +99,7 @@ class ReportController extends Controller
             'wares' => IncomingWare::with(['product','penerima'])
                 ->whereMonth('created_at', $bulan)
                 ->whereYear('created_at', $tahun)
-                ->get(),
+                ->get(['id','nama_barang','jumlah','nama_toko']),
             'bulan' => $bulan,
             'tahun' => $tahun,
         ]);

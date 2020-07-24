@@ -34,6 +34,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('reports/demands', 'ReportController@demands')->name('reports.demands');
     Route::get('reports/pembelian', 'ReportController@pembelian')->name('reports.pembelian');
     Route::get('reports/barang-masuk', 'ReportController@barangmasuk')->name('reports.barang-masuk');
+
+    // PDF
+    Route::get('pdf/stock/{bulan}/{tahun}', 'PDFController@stock')->name('pdf.stock');
+    Route::get('pdf/barang-masuk/{bulan}/{tahun}', 'PDFController@barangmasuk')->name('pdf.barangmasuk');
+    Route::get('pdf/demands/{bulan}/{tahun}', 'PDFController@demands')->name('pdf.demands');
+    Route::get('pdf/pembelian/{bulan}/{tahun}', 'PDFController@pembelian')->name('pdf.pembelian');
 });
 
 Auth::routes();
