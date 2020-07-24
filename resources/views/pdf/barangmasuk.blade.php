@@ -4,8 +4,8 @@ Laporan Barang Masuk Periode {{ $months[ltrim($bulan, '0') - 1] }} {{ $tahun }}
 @endsection
 
 @section('content')
+    @include('pdf.header')
     <div class="container">
-        @include('pdf.header')
       <h1 class="mb-8 font-bold text-2xl text-center">
         Laporan Barang Masuk<br>Periode {{ $months[ltrim($bulan,"0") - 1] }} {{ $tahun }}
       </h1>
@@ -40,6 +40,6 @@ Laporan Barang Masuk Periode {{ $months[ltrim($bulan, '0') - 1] }} {{ $tahun }}
           @endif
         </table>
       </div>
-      @include('pdf.footer')
     </div>
+    @include('pdf.footer')
 @endsection
