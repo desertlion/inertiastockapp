@@ -15,9 +15,10 @@
                 required>
                 <option v-for="product in products" :key="`p-${product.id}`" :value="product.id">{{ product.name }}</option>
             </form-select>
-            <form-input class="w-full" v-model="form.jumlah" :errors="$page.errors.jumlah" required label="Jumlah Barang" />
-            <form-input class="w-full" v-model="form.tanggal_masuk" :errors="$page.errors.tanggal_masuk" required label="Tanggal Masuk" />
-            <form-input class="w-full" v-model="form.nama_toko" :errors="$page.errors.nama_toko" required label="Nama Toko" />
+            <form-input class="w-full mb-6" v-model="form.jumlah" :errors="$page.errors.jumlah" required label="Jumlah Barang" />
+            <label class="block text-gray-700 text-sm font-bold mb-2">Tanggal Masuk</label>
+            <datetime class="w-full mb-6" v-model="form.tanggal_masuk" input-class="w-full" />
+            <form-input class="w-full mb-6" v-model="form.nama_toko" :errors="$page.errors.nama_toko" required label="Nama Toko" />
             <form-select class="mb-6 w-full"
                 label="Penerima"
                 placeholder="Penerima"

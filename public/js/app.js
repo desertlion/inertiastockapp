@@ -3248,6 +3248,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -44606,7 +44607,7 @@ var render = function() {
               ),
               _vm._v(" "),
               _c("form-input", {
-                staticClass: "w-full",
+                staticClass: "w-full mb-6",
                 attrs: {
                   errors: _vm.$page.errors.jumlah,
                   required: "",
@@ -44621,13 +44622,15 @@ var render = function() {
                 }
               }),
               _vm._v(" "),
-              _c("form-input", {
-                staticClass: "w-full",
-                attrs: {
-                  errors: _vm.$page.errors.tanggal_masuk,
-                  required: "",
-                  label: "Tanggal Masuk"
-                },
+              _c(
+                "label",
+                { staticClass: "block text-gray-700 text-sm font-bold mb-2" },
+                [_vm._v("Tanggal Masuk")]
+              ),
+              _vm._v(" "),
+              _c("datetime", {
+                staticClass: "w-full mb-6",
+                attrs: { "input-class": "w-full" },
                 model: {
                   value: _vm.form.tanggal_masuk,
                   callback: function($$v) {
@@ -44638,7 +44641,7 @@ var render = function() {
               }),
               _vm._v(" "),
               _c("form-input", {
-                staticClass: "w-full",
+                staticClass: "w-full mb-6",
                 attrs: {
                   errors: _vm.$page.errors.nama_toko,
                   required: "",
