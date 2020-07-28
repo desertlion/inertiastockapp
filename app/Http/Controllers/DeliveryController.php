@@ -31,6 +31,15 @@ class DeliveryController extends Controller
      */
     public function create(Request $request)
     {
+        // pastikan dulu ada itu input order
+        $order = Order::find($request->input('order_id'));
+        if(!$order) return redirect()->back()->with('error', 'Nomor Permintaan tidak ditemukan');
+
+        $stock = Stock::where('product_id', $order->product_id)->first();
+        if($stock->jumlah - $order->jumlah < 0):
+            return redirect()->back()->with('error', 'Stock barang tidak mencukupi!');
+        endif;
+
         return Inertia::render('deliveries/create', [
             'order_id' => $request->input('order_id'),
         ]);
@@ -54,7 +63,9 @@ class DeliveryController extends Controller
         if(!$order) return redirect()->back();
 
         $stock = Stock::where('product_id', $order->product_id)->first();
-        if($stock->jumlah - $order->jumlah < 0) return redirect()->back();
+        if($stock->jumlah - $order->jumlah < 0):
+            return redirect()->back()->with('error', 'Stock barang tidak mencukupi!');
+        endif;
 
         DB::transaction(function () use ($request, $order, $stock) {
             Delivery::create([

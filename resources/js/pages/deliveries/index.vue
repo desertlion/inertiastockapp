@@ -10,10 +10,10 @@
           <option value="owner">Owner</option>
         </select>
       </search-filter>
-      <inertia-link class="btn-indigo" :href="$route('deliveries.create')">
+      <!-- <inertia-link class="btn-indigo" :href="$route('deliveries.create')">
         <span>Tambah</span>
         <span class="hidden md:inline">Penyerahan</span>
-      </inertia-link>
+      </inertia-link> -->
     </div>
     <div class="bg-white rounded shadow overflow-x-auto">
       <table class="w-full whitespace-no-wrap">

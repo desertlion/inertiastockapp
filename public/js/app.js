@@ -2917,6 +2917,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -3560,6 +3565,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -3594,6 +3607,11 @@ __webpack_require__.r(__webpack_exports__);
         this.$inertia.replace(this.$route('orders.index', Object.keys(query).length ? query : {}));
       }, 150),
       deep: true
+    }
+  },
+  computed: {
+    allowAccess: function allowAccess() {
+      return this.$page.auth.user.division == 'rumah tangga';
     }
   },
   methods: {
@@ -43990,6 +44008,25 @@ var render = function() {
       1
     ),
     _vm._v(" "),
+    _vm.$page.error
+      ? _c(
+          "div",
+          {
+            staticClass:
+              "mb-8 flex items-center justify-between bg-red-500 rounded max-w-3xl"
+          },
+          [
+            _c("div", { staticClass: "flex items-center" }, [
+              _c(
+                "div",
+                { staticClass: "px-4 py-4 text-white text-sm font-medium" },
+                [_vm._v(_vm._s(_vm.$page.error))]
+              )
+            ])
+          ]
+        )
+      : _vm._e(),
+    _vm._v(" "),
     _c("div", { staticClass: "bg-white rounded shadow overflow-hidden" }, [
       _c(
         "form",
@@ -44291,21 +44328,6 @@ var render = function() {
                 _c("option", { attrs: { value: "owner" } }, [_vm._v("Owner")])
               ]
             )
-          ]
-        ),
-        _vm._v(" "),
-        _c(
-          "inertia-link",
-          {
-            staticClass: "btn-indigo",
-            attrs: { href: _vm.$route("deliveries.create") }
-          },
-          [
-            _c("span", [_vm._v("Tambah")]),
-            _vm._v(" "),
-            _c("span", { staticClass: "hidden md:inline" }, [
-              _vm._v("Penyerahan")
-            ])
           ]
         )
       ],
@@ -45190,6 +45212,25 @@ var render = function() {
       1
     ),
     _vm._v(" "),
+    _vm.$page.error
+      ? _c(
+          "div",
+          {
+            staticClass:
+              "mb-8 flex items-center justify-between bg-red-500 rounded max-w-3xl"
+          },
+          [
+            _c("div", { staticClass: "flex items-center" }, [
+              _c(
+                "div",
+                { staticClass: "px-4 py-4 text-white text-sm font-medium" },
+                [_vm._v(_vm._s(_vm.$page.error))]
+              )
+            ])
+          ]
+        )
+      : _vm._e(),
+    _vm._v(" "),
     _c("div", { staticClass: "bg-white rounded shadow overflow-x-auto" }, [
       _c(
         "table",
@@ -45305,25 +45346,40 @@ var render = function() {
                   "td",
                   { staticClass: "border-t" },
                   [
-                    _c(
-                      "inertia-link",
-                      {
-                        staticClass:
-                          "px-6 py-4 flex items-center focus:text-indigo-500",
-                        attrs: {
-                          href: _vm.$route("deliveries.create", {
-                            order_id: order.id
-                          })
-                        }
-                      },
-                      [
-                        _vm._v(
-                          "\n            " +
-                            _vm._s(_vm.status[order.status]) +
-                            "\n          "
+                    _vm.allowAccess
+                      ? _c(
+                          "inertia-link",
+                          {
+                            staticClass:
+                              "px-6 py-4 flex items-center focus:text-indigo-500",
+                            attrs: {
+                              href: _vm.$route("deliveries.create", {
+                                order_id: order.id
+                              })
+                            }
+                          },
+                          [
+                            _vm._v(
+                              "\n            " +
+                                _vm._s(_vm.status[order.status]) +
+                                "\n          "
+                            )
+                          ]
                         )
-                      ]
-                    )
+                      : _c(
+                          "span",
+                          {
+                            staticClass:
+                              "px-6 py-4 flex items-center focus:text-indigo-500"
+                          },
+                          [
+                            _vm._v(
+                              "\n            " +
+                                _vm._s(_vm.status[order.status]) +
+                                "\n          "
+                            )
+                          ]
+                        )
                   ],
                   1
                 )
@@ -48407,8 +48463,7 @@ var render = function() {
         )
       : _vm._e(),
     _vm._v(" "),
-    (_vm.$page.flash.error || Object.keys(_vm.$page.errors).length > 0) &&
-    _vm.show
+    (_vm.$page.error || Object.keys(_vm.$page.errors).length > 0) && _vm.show
       ? _c(
           "div",
           {
@@ -48436,11 +48491,11 @@ var render = function() {
                 ]
               ),
               _vm._v(" "),
-              _vm.$page.flash.error
+              _vm.$page.error
                 ? _c(
                     "div",
                     { staticClass: "py-4 text-white text-sm font-medium" },
-                    [_vm._v(_vm._s(_vm.$page.flash.error))]
+                    [_vm._v(_vm._s(_vm.$page.error))]
                   )
                 : _c(
                     "div",

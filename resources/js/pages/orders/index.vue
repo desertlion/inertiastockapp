@@ -11,6 +11,11 @@
         <span class="hidden md:inline">Permintaan</span>
       </inertia-link>
     </div>
+    <div v-if="$page.error" class="mb-8 flex items-center justify-between bg-red-500 rounded max-w-3xl">
+      <div class="flex items-center">
+        <div class="px-4 py-4 text-white text-sm font-medium">{{ $page.error }}</div>
+        </div>
+    </div>
     <div class="bg-white rounded shadow overflow-x-auto">
       <table class="w-full whitespace-no-wrap">
         <tr class="text-left font-bold">
@@ -42,9 +47,12 @@
             </inertia-link>
           </td>
           <td class="border-t">
-            <inertia-link class="px-6 py-4 flex items-center focus:text-indigo-500" :href="$route('deliveries.create', { order_id: order.id })">
+            <inertia-link v-if="allowAccess" class="px-6 py-4 flex items-center focus:text-indigo-500" :href="$route('deliveries.create', { order_id: order.id })">
               {{ status[order.status] }}
             </inertia-link>
+            <span v-else class="px-6 py-4 flex items-center focus:text-indigo-500">
+              {{ status[order.status] }}
+            </span>
           </td>
         </tr>
         <tr v-if="orders.length === 0">
@@ -90,6 +98,11 @@ export default {
       }, 150),
       deep: true,
     },
+  },
+  computed: {
+      allowAccess() {
+          return this.$page.auth.user.division == 'rumah tangga';
+      }
   },
   methods: {
     reset() {

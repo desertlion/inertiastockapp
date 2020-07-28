@@ -4,6 +4,11 @@
       <inertia-link class="text-indigo-400 hover:text-indigo-600" :href="$route('deliveries.index')">Penyerahan</inertia-link>
       <span class="text-indigo-400 font-medium">/</span> Tambah
     </h1>
+    <div v-if="$page.error" class="mb-8 flex items-center justify-between bg-red-500 rounded max-w-3xl">
+      <div class="flex items-center">
+        <div class="px-4 py-4 text-white text-sm font-medium">{{ $page.error }}</div>
+        </div>
+    </div>
     <div class="bg-white rounded shadow overflow-hidden">
       <form @submit.prevent="submit">
         <div class="p-8 -mr-6 -mb-8 flex flex-wrap">
