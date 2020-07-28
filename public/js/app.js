@@ -3844,6 +3844,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   /**
    * Layout of the page.
@@ -3905,6 +3907,8 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
 //
 //
 //
@@ -45825,11 +45829,15 @@ var render = function() {
               _vm._v(" "),
               _c("option", [_vm._v("kepegawaian")]),
               _vm._v(" "),
+              _c("option", [_vm._v("tata usaha")]),
+              _vm._v(" "),
               _c("option", [_vm._v("fasilitas")]),
               _vm._v(" "),
               _c("option", [_vm._v("kepatuhan internal")]),
               _vm._v(" "),
-              _c("option", [_vm._v("pabean")]),
+              _c("option", [_vm._v("kepabeanan")]),
+              _vm._v(" "),
+              _c("option", [_vm._v("kepabeanan dan cukai")]),
               _vm._v(" "),
               _c("option", [_vm._v("penindakan dan penyelidikan")])
             ]
@@ -46009,11 +46017,15 @@ var render = function() {
               _vm._v(" "),
               _c("option", [_vm._v("kepegawaian")]),
               _vm._v(" "),
+              _c("option", [_vm._v("tata usaha")]),
+              _vm._v(" "),
               _c("option", [_vm._v("fasilitas")]),
               _vm._v(" "),
               _c("option", [_vm._v("kepatuhan internal")]),
               _vm._v(" "),
-              _c("option", [_vm._v("pabean")]),
+              _c("option", [_vm._v("kepabeanan")]),
+              _vm._v(" "),
+              _c("option", [_vm._v("kepabeanan dan cukai")]),
               _vm._v(" "),
               _c("option", [_vm._v("penindakan dan penyelidikan")])
             ]

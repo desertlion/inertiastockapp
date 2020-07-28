@@ -42,9 +42,11 @@
                 <option>rumah tangga</option>
                 <option>keuangan</option>
                 <option>kepegawaian</option>
+                <option>tata usaha</option>
                 <option>fasilitas</option>
                 <option>kepatuhan internal</option>
-                <option>pabean</option>
+                <option>kepabeanan</option>
+                <option>kepabeanan dan cukai</option>
                 <option>penindakan dan penyelidikan</option>
             </form-select>
             <button class="w-full bg-gray-800 hover:bg-gray-900 text-white text-sm font-semibold rounded focus:outline-none focus:shadow-outline py-3">Submit</button>
