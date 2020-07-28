@@ -38,5 +38,28 @@ class UserController extends Controller
         return Redirect::route('pegawai');
     }
 
-    public function edit() {}
+    public function edit($id) {
+        return Inertia::render('pegawai-edit', [
+            'edited_user' => User::find($id),
+        ]);
+    }
+
+    public function update(Request $request, $id) {
+        $request->validate([
+            'name' => ['required', 'max:50'],
+            'email' => ['required', 'max:50', 'email'],
+            'phone' => ['required'],
+            'jabatan' => ['required'],
+            'division' => ['required'],
+        ]);
+        $user = User::find($id);
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->phone = $request->input('phone');
+        $user->jabatan = $request->input('jabatan');
+        $user->division = $request->input('division');
+        $user->save();
+
+        return Redirect::route('pegawai');
+    }
 }

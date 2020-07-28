@@ -1,7 +1,7 @@
 <template>
     <div class="max-w-md lg:max-w-3xl bg-white rounded-lg shadow mx-auto p-8">
         <div class="flex justify-between items-center mb-4">
-            <h3 class="section-title">Tambah Pegawai</h3>
+            <h3 class="section-title">Edit Pegawai</h3>
             <button class="btn-primary" @click="$inertia.visit($route('pegawai'))">&laquo;</button>
         </div>
         <form method="post" @submit.prevent="submit">
@@ -67,7 +67,7 @@
          * @type {Object}
          */
         props: {
-            user: Object,
+            edited_user: Object,
         },
         data: () => ({
             form: {
@@ -78,12 +78,21 @@
                 phone: '',
             },
         }),
+        mounted() {
+            this.form = {
+                name: this.edited_user.name,
+                jabatan: this.edited_user.jabatan,
+                division: this.edited_user.division,
+                email: this.edited_user.email,
+                phone: this.edited_user.phone,
+            }
+        },
         methods: {
             submit() {
                 this.$page.errors = {}
 
-                this.$inertia.post(
-                    '/users', { ...this.form }
+                this.$inertia.put(
+                    `/pegawai/${this.edited_user.id}`, { ...this.form }
                 )
             },
         }

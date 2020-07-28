@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\IncomingWare;
 use App\Product;
 use App\Stock;
 use Inertia\Inertia;
@@ -18,9 +20,12 @@ class ProductsController extends Controller
      */
     public function index(Request $request)
     {
+        $products = $request->input('search')
+            ? Product::with(['stock'])->where('name','like','%'.$request->input('search').'%')->get()
+            : Product::with(['stock'])->get();
         return Inertia::render('products/index', [
             'filters' => $request->all('search'),
-            'products' => Product::with(['stock'])->get()
+            'products' => $products,
         ]);
     }
 
@@ -106,6 +111,10 @@ class ProductsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $product = Product::find($id);
+        $incoming = IncomingWare::where('product_id', $id)->first();
+        if($incoming->isEmpty()) Product::destroy($id);
+        return redirect()->route('products.index');
     }
+
 }

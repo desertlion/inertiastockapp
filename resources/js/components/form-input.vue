@@ -2,7 +2,7 @@
     <label class="block">
         <span v-if="label" class="block text-gray-700 text-sm font-bold mb-2" v-text="label"></span>
 
-        <input class="text-sm appearance-none border rounded w-full py-3 bg-gray-200 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        <input class="text-sm appearance-none border rounded w-full py-3 bg-gray-100 px-3 text-gray-900 leading-tight focus:outline-none focus:shadow-outline"
                 :class="{ 'border-red-500 mb-1': errors.length }"
                 v-bind="$attrs"
                 v-on="{ ...$listeners, input: event => $emit('input', event.target.value) }">

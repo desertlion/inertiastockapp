@@ -2,20 +2,10 @@
   <div class="container">
     <h1 class="mb-8 font-bold text-3xl">Barang</h1>
     <div class="mb-6 flex justify-between items-center">
-      <search-filter v-model="form.search" class="w-full max-w-md mr-4" @reset="reset">
-        <label class="block text-gray-700">Role:</label>
-        <select v-model="form.role" class="mt-1 w-full form-select">
-          <option :value="null" />
-          <option value="user">User</option>
-          <option value="owner">Owner</option>
-        </select>
-        <label class="mt-4 block text-gray-700">Trashed:</label>
-        <select v-model="form.trashed" class="mt-1 w-full form-select">
-          <option :value="null" />
-          <option value="with">With Trashed</option>
-          <option value="only">Only Trashed</option>
-        </select>
-      </search-filter>
+        <div class="flex flex-start items-center">
+      <form-input v-model="form.search" :errors="$page.errors.search" required label="Search Product" />
+      <button class="ml-3 text-sm text-gray-500 hover:text-gray-700 focus:text-indigo-500" type="button" @click="reset">Reset</button>
+      </div>
       <inertia-link class="btn-indigo" :href="$route('products.create')">
         <span>Tambah</span>
         <span class="hidden md:inline">Barang</span>
@@ -46,7 +36,9 @@
             </inertia-link>
           </td>
           <td class="border-t">
+            <span class="px-6 py-4 flex items-center text-red-600 cursor-pointer" @click="destroy">
               Delete
+            </span>
           </td>
         </tr>
         <tr v-if="products.length === 0">
@@ -79,7 +71,7 @@ export default {
   data() {
     return {
       form: {
-        search: this.filters.search,
+        search: '',
       },
     }
   },
@@ -87,7 +79,7 @@ export default {
     form: {
       handler: throttle(function() {
         let query = pickBy(this.form)
-        this.$inertia.replace(this.$route('products', Object.keys(query).length ? query : { remember: 'forget' }))
+        this.$inertia.replace(this.$route('products.index', Object.keys(query).length ? query : {}))
       }, 150),
       deep: true,
     },
@@ -95,6 +87,11 @@ export default {
   methods: {
     reset() {
       this.form = mapValues(this.form, () => null)
+    },
+    destroy(id) {
+      if (confirm('Are you sure you want to delete this product?')) {
+        this.$inertia.delete(this.$route('products.destroy', id))
+      }
     },
   },
 }
