@@ -40,7 +40,7 @@
               {{ ware.nama_toko }}
           </td>
           <td class="border-t px-6 py-4">
-              {{ ware.Penerima.name }}
+              {{ ware.user.name }}
           </td>
         </tr>
         <tr v-if="wares.length === 0">

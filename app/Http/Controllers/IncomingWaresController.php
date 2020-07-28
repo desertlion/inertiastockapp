@@ -17,10 +17,16 @@ class IncomingWaresController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        if($request->input('search')):
+            $product = Product::where('name','like','%'.$request->input('search').'%')->get(['id']);
+            $warez = IncomingWare::with(['product','penerima'])->whereIn('product_id', $product)->get();
+        else:
+            $warez = IncomingWare::with(['product','penerima'])->get();
+        endif;
         return Inertia::render('incomingwares/index', [
-            'wares' => IncomingWare::with(['product','penerima'])->get()
+            'wares' => $warez
         ]);
     }
 

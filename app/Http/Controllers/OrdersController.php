@@ -6,6 +6,7 @@ use App\Order;
 use App\Product;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 
@@ -16,10 +17,21 @@ class OrdersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        if($request->input('search')):
+            $product = Product::where('name','like','%'.$request->input('search').'%')->get(['id']);
+            $orders = Order::with(['pegawai','product'])->whereIn('product_id', $product);
+        else:
+            $orders = Order::with(['pegawai', 'product']);
+        endif;
+        if(Auth::user()->division != 'rumah tangga'):
+            $orders = $orders->where('user_id', Auth::user()->id)->get();
+        else:
+            $orders = $orders->get();
+        endif;
         return Inertia::render('orders/index', [
-            'orders' => Order::with(['pegawai', 'product'])->get(),
+            'orders' => $orders,
             'status' => ['processing', 'done']
         ]);
     }

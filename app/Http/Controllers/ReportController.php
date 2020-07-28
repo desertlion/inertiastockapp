@@ -96,10 +96,10 @@ class ReportController extends Controller
         if(!isset($tahun)) $tahun = date('Y');
 
         return Inertia::render('reports/barangmasuk', [
-            'wares' => IncomingWare::with(['product','penerima'])
+            'wares' => IncomingWare::with(['product', 'user'])
                 ->whereMonth('created_at', $bulan)
                 ->whereYear('created_at', $tahun)
-                ->get(['id','nama_barang','jumlah','nama_toko']),
+                ->get(),
             'bulan' => $bulan,
             'tahun' => $tahun,
         ]);

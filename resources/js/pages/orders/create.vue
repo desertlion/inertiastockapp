@@ -17,7 +17,10 @@
                 <option v-for="product in products" :key="`p-${product.id}`" :value="product.id">{{ product.name }}</option>
             </form-select>
             <form-input class="w-full" v-model="form.jumlah" :errors="$page.errors.jumlah" required label="Jumlah Barang" />
-            <form-input class="w-full" v-model="form.tanggal_permintaan" :errors="$page.errors.tanggal_permintaan" required label="Tanggal Permintaan" />
+            <div class="mt-5">
+                <label class="block text-gray-700 text-sm font-bold mb-2">Tanggal Permintaan</label>
+                <datetime v-model="form.tanggal_permintaan" class="w-full" />
+            </div>
         </div>
         <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex justify-end items-center mt-6">
           <loading-button :loading="sending" class="btn-indigo" type="submit">Tambah Permintaan</loading-button>

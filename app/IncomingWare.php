@@ -12,6 +12,10 @@ class IncomingWare extends Model
         return $this->belongsTo('App\Product');
     }
 
+    public function user() {
+        return $this->belongsTo('App\User', 'penerima');
+    }
+
     public function Penerima() {
         return $this->belongsTo('App\User', 'penerima');
     }

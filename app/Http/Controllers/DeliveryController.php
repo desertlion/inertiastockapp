@@ -29,9 +29,11 @@ class DeliveryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        return Inertia::render('deliveries/create');
+        return Inertia::render('deliveries/create', [
+            'order_id' => $request->input('order_id'),
+        ]);
     }
 
     /**
@@ -60,7 +62,7 @@ class DeliveryController extends Controller
                 'tanggal_penyerahan' => $request->input('tanggal_penyerahan'),
             ]);
             // Ubah Status Permintaan dari Processing menjadi done
-            $order->status = 1;
+            $order->status = '1';
             $order->save();
             // Kurangi jumlah stock
             $stock->jumlah = (int) $stock->jumlah - (int) $order->jumlah;

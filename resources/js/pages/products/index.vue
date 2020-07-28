@@ -3,9 +3,9 @@
     <h1 class="mb-8 font-bold text-3xl">Barang</h1>
     <div class="mb-6 flex justify-between items-center">
         <div class="flex flex-start items-center">
-      <form-input v-model="form.search" :errors="$page.errors.search" required label="Search Product" />
-      <button class="ml-3 text-sm text-gray-500 hover:text-gray-700 focus:text-indigo-500" type="button" @click="reset">Reset</button>
-      </div>
+            <form-input v-model="form.search" :errors="$page.errors.search" required label="Search Product" />
+            <button class="ml-3 text-sm text-gray-500 hover:text-gray-700 focus:text-indigo-500" type="button" @click="reset">Reset</button>
+        </div>
       <inertia-link class="btn-indigo" :href="$route('products.create')">
         <span>Tambah</span>
         <span class="hidden md:inline">Barang</span>

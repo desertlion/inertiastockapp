@@ -2,14 +2,10 @@
   <div class="container">
     <h1 class="mb-8 font-bold text-3xl">Permintaan</h1>
     <div class="mb-6 flex justify-between items-center">
-      <search-filter v-model="form.search" class="w-full max-w-md mr-4" @reset="reset">
-        <label class="block text-gray-700">Role:</label>
-        <select v-model="form.role" class="mt-1 w-full form-select">
-          <option :value="null" />
-          <option value="user">Nama Barang</option>
-          <option value="user">Nama Toko</option>
-        </select>
-      </search-filter>
+        <div class="flex flex-start items-center">
+            <form-input v-model="form.search" :errors="$page.errors.search" required label="Search Product" />
+            <button class="ml-3 text-sm text-gray-500 hover:text-gray-700 focus:text-indigo-500" type="button" @click="reset">Reset</button>
+        </div>
       <inertia-link class="btn-indigo" :href="$route('orders.create')">
         <span>Tambah</span>
         <span class="hidden md:inline">Permintaan</span>
@@ -46,7 +42,7 @@
             </inertia-link>
           </td>
           <td class="border-t">
-            <inertia-link class="px-6 py-4 flex items-center focus:text-indigo-500" :href="$route('orders.edit', order.id)">
+            <inertia-link class="px-6 py-4 flex items-center focus:text-indigo-500" :href="$route('deliveries.create', { order_id: order.id })">
               {{ status[order.status] }}
             </inertia-link>
           </td>
@@ -82,7 +78,7 @@ export default {
   data() {
     return {
       form: {
-        // search: this.filters.search,
+        search: '',
       },
     }
   },
@@ -90,7 +86,7 @@ export default {
     form: {
       handler: throttle(function() {
         let query = pickBy(this.form)
-        this.$inertia.replace(this.$route('orders.index', Object.keys(query).length ? query : { remember: 'forget' }))
+        this.$inertia.replace(this.$route('orders.index', Object.keys(query).length ? query : {}))
       }, 150),
       deep: true,
     },

@@ -8,7 +8,10 @@
       <form @submit.prevent="submit">
         <div class="p-8 -mr-6 -mb-8 flex flex-wrap">
           <form-input class="w-full" v-model="form.order_id" :errors="$page.errors.order_id" required label="Nomor Permintaan" />
-          <form-input class="w-full" v-model="form.tanggal_penyerahan" :errors="$page.errors.tanggal_penyerahan" required label="Tanggal Penyerahan" />
+          <div class="mt-5">
+            <label class="block text-gray-700 text-sm font-bold mb-2">Tanggal Penyerahan</label>
+            <datetime v-model="form.tanggal_penyerahan" class="w-full" />
+          </div>
         </div>
         <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex justify-end items-center mt-6">
           <loading-button :loading="sending" class="btn-indigo" type="submit">Submit</loading-button>
@@ -28,6 +31,7 @@ export default {
     LoadingButton,
   },
   remember: 'form',
+  props: ['order_id'],
   data() {
     return {
       sending: false,
@@ -36,6 +40,9 @@ export default {
         tanggal_penyerahan: null,
       },
     }
+  },
+  mounted() {
+      this.form.order_id = this.order_id;
   },
   methods: {
     submit() {
