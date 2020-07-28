@@ -11,6 +11,16 @@
         <span class="hidden md:inline">Barang</span>
       </inertia-link>
     </div>
+    <div v-if="$page.error" class="mb-8 flex items-center justify-between bg-red-500 rounded max-w-3xl">
+      <div class="flex items-center">
+        <div class="px-4 py-4 text-white text-sm font-medium">{{ $page.error }}</div>
+        </div>
+    </div>
+    <div v-if="$page.success" class="mb-8 flex items-center justify-between bg-green-500 rounded max-w-3xl">
+      <div class="flex items-center">
+        <div class="px-4 py-4 text-white text-sm font-medium">{{ $page.success }}</div>
+        </div>
+    </div>
     <div class="bg-white rounded shadow overflow-x-auto">
       <table class="w-full whitespace-no-wrap">
         <tr class="text-left font-bold">
@@ -36,7 +46,7 @@
             </inertia-link>
           </td>
           <td class="border-t">
-            <span class="px-6 py-4 flex items-center text-red-600 cursor-pointer" @click="destroy">
+            <span class="px-6 py-4 flex items-center text-red-600 cursor-pointer" @click="destroy(product.id)">
               Delete
             </span>
           </td>

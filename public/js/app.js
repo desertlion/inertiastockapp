@@ -4284,6 +4284,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -46511,6 +46521,44 @@ var render = function() {
       1
     ),
     _vm._v(" "),
+    _vm.$page.error
+      ? _c(
+          "div",
+          {
+            staticClass:
+              "mb-8 flex items-center justify-between bg-red-500 rounded max-w-3xl"
+          },
+          [
+            _c("div", { staticClass: "flex items-center" }, [
+              _c(
+                "div",
+                { staticClass: "px-4 py-4 text-white text-sm font-medium" },
+                [_vm._v(_vm._s(_vm.$page.error))]
+              )
+            ])
+          ]
+        )
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.$page.success
+      ? _c(
+          "div",
+          {
+            staticClass:
+              "mb-8 flex items-center justify-between bg-green-500 rounded max-w-3xl"
+          },
+          [
+            _c("div", { staticClass: "flex items-center" }, [
+              _c(
+                "div",
+                { staticClass: "px-4 py-4 text-white text-sm font-medium" },
+                [_vm._v(_vm._s(_vm.$page.success))]
+              )
+            ])
+          ]
+        )
+      : _vm._e(),
+    _vm._v(" "),
     _c("div", { staticClass: "bg-white rounded shadow overflow-x-auto" }, [
       _c(
         "table",
@@ -46601,7 +46649,11 @@ var render = function() {
                     {
                       staticClass:
                         "px-6 py-4 flex items-center text-red-600 cursor-pointer",
-                      on: { click: _vm.destroy }
+                      on: {
+                        click: function($event) {
+                          return _vm.destroy(product.id)
+                        }
+                      }
                     },
                     [_vm._v("\n            Delete\n          ")]
                   )
