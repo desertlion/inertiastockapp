@@ -45,7 +45,11 @@ class OrdersController extends Controller
     {
         return Inertia::render('orders/create', [
             'users' => User::all(),
-            'products' => Product::all(),
+            'products' => Product::with('stock')
+                ->whereHas('stock', function($q) {
+                    $q->where('jumlah', '>', 0);
+                })
+                ->get(),
         ]);
     }
 

@@ -11,4 +11,8 @@ class Product extends Model
     public function stock() {
         return $this->hasOne('App\Stock');
     }
+
+    public function availableStock() {
+        return $this->hasOne('App\Stock')->where('jumlah','>',0);
+    }
 }

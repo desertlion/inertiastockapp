@@ -39,7 +39,6 @@ class IncomingWaresController extends Controller
     {
         return Inertia::render('incomingwares/create', [
             'products' => Product::all(),
-            'users' => User::all(),
         ]);
     }
 

@@ -3242,13 +3242,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -3272,7 +3265,7 @@ __webpack_require__.r(__webpack_exports__);
         jumlah: null,
         tanggal_masuk: null,
         nama_toko: null,
-        penerima: null
+        penerima: this.$page.auth.user.id
       }
     };
   },
@@ -3419,6 +3412,13 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _layouts_dashboard__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/layouts/dashboard */ "./resources/js/layouts/dashboard.vue");
 /* harmony import */ var _shared_LoadingButton__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/shared/LoadingButton */ "./resources/js/shared/LoadingButton.vue");
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -44656,33 +44656,26 @@ var render = function() {
                 }
               }),
               _vm._v(" "),
-              _c(
-                "form-select",
-                {
-                  staticClass: "mb-6 w-full",
-                  attrs: {
-                    label: "Penerima",
-                    placeholder: "Penerima",
-                    errors: _vm.$page.errors.penerima,
-                    required: ""
-                  },
-                  model: {
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
                     value: _vm.form.penerima,
-                    callback: function($$v) {
-                      _vm.$set(_vm.form, "penerima", $$v)
-                    },
                     expression: "form.penerima"
                   }
-                },
-                _vm._l(_vm.users, function(user) {
-                  return _c(
-                    "option",
-                    { key: "p-" + user.id, domProps: { value: user.id } },
-                    [_vm._v(_vm._s(user.name))]
-                  )
-                }),
-                0
-              )
+                ],
+                attrs: { type: "hidden" },
+                domProps: { value: _vm.form.penerima },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.form, "penerima", $event.target.value)
+                  }
+                }
+              })
             ],
             1
           ),
@@ -45052,31 +45045,87 @@ var render = function() {
               }),
               _vm._v(" "),
               _c(
-                "form-select",
-                {
-                  staticClass: "mb-6 w-full",
-                  attrs: {
-                    label: "Pilih Barang",
-                    placeholder: "Pilih Barang",
-                    errors: _vm.$page.errors.product_id,
-                    required: ""
-                  },
-                  model: {
-                    value: _vm.form.product_id,
-                    callback: function($$v) {
-                      _vm.$set(_vm.form, "product_id", $$v)
+                "div",
+                { staticClass: "my-checkboxes mb-3" },
+                [
+                  _c(
+                    "span",
+                    {
+                      staticClass: "block text-gray-700 text-sm font-bold mb-2"
                     },
-                    expression: "form.product_id"
-                  }
-                },
-                _vm._l(_vm.products, function(product) {
-                  return _c(
-                    "option",
-                    { key: "p-" + product.id, domProps: { value: product.id } },
-                    [_vm._v(_vm._s(product.name))]
-                  )
-                }),
-                0
+                    [_vm._v("Pilih Barang")]
+                  ),
+                  _vm._v(" "),
+                  _vm._l(_vm.products, function(product) {
+                    return _c(
+                      "label",
+                      {
+                        key: "key-" + product.id,
+                        staticClass:
+                          "flex items-center mb-2 border rounded p-3 bg-gray-200 hover:bg-gray-300 cursor-pointer"
+                      },
+                      [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.form.product_id,
+                              expression: "form.product_id"
+                            }
+                          ],
+                          staticClass:
+                            "border rounded py-3 bg-gray-100 px-3 focus:outline-none focus:shadow-outline mr-3",
+                          class: {
+                            "border-red-500 mb-1": _vm.$page.errors.product_id
+                          },
+                          attrs: { type: "radio" },
+                          domProps: {
+                            value: product.id,
+                            checked: _vm._q(_vm.form.product_id, product.id)
+                          },
+                          on: {
+                            change: function($event) {
+                              return _vm.$set(
+                                _vm.form,
+                                "product_id",
+                                product.id
+                              )
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "block text-gray-700 text-sm" },
+                          [
+                            _c("span", {
+                              domProps: { textContent: _vm._s(product.name) }
+                            }),
+                            _vm._v(" "),
+                            _c("span", [
+                              _vm._v(
+                                " (" +
+                                  _vm._s(product.stock.jumlah) +
+                                  " in stock)"
+                              )
+                            ])
+                          ]
+                        )
+                      ]
+                    )
+                  }),
+                  _vm._v(" "),
+                  _vm.$page.errors.product_id
+                    ? _c("p", {
+                        staticClass: "text-red-500 text-xs italic pl-1",
+                        domProps: {
+                          textContent: _vm._s(_vm.$page.errors.product_id[0])
+                        }
+                      })
+                    : _vm._e()
+                ],
+                2
               ),
               _vm._v(" "),
               _c("form-input", {

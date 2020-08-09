@@ -115,6 +115,7 @@ class ProductsController extends Controller
         $incoming = IncomingWare::where('product_id', $id)->first();
         if($incoming == null):
             Product::destroy($id);
+            Stock::where('product_id', $id)->destroy();
             return redirect()->back()->with('success', 'Barang berhasil dihapus');
         endif;
         return redirect()->route('products.index')->with('error', 'Tidak bisa menghapus barang, sudah ada transaksi untuk barang ini');
