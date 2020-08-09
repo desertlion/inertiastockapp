@@ -19,14 +19,7 @@
             <label class="block text-gray-700 text-sm font-bold mb-2">Tanggal Masuk</label>
             <datetime class="w-full mb-6" v-model="form.tanggal_masuk" input-class="w-full" />
             <form-input class="w-full mb-6" v-model="form.nama_toko" :errors="$page.errors.nama_toko" required label="Nama Toko" />
-            <form-select class="mb-6 w-full"
-                label="Penerima"
-                placeholder="Penerima"
-                v-model="form.penerima"
-                :errors="$page.errors.penerima"
-                required>
-                <option v-for="user in users" :key="`p-${user.id}`" :value="user.id">{{ user.name }}</option>
-            </form-select>
+            <input type="hidden" v-model="form.penerima" />
         </div>
         <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex justify-end items-center mt-6">
           <loading-button :loading="sending" class="btn-indigo" type="submit">Tambah Barang Masuk</loading-button>
@@ -58,7 +51,7 @@ export default {
         jumlah: null,
         tanggal_masuk: null,
         nama_toko: null,
-        penerima: null,
+        penerima: this.$page.auth.user.id,
       },
     }
   },
