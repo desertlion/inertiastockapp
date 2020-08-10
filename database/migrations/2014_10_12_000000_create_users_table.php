@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('phone')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->enum('division', ['rumah tangga', 'keuangan']);
+            $table->enum('division', ['rumah tangga','keuangan','kepegawaian','pabean','fasilitas','penindakan dan penyelidikan','kepatuhan internal']);
             $table->enum('jabatan', ['kepala', 'staff']);
             $table->rememberToken();
             $table->timestamps();
